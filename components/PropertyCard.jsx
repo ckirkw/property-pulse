@@ -73,7 +73,7 @@ const PropertyCard = ({
 
         <div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
           {Object.keys(rates).map((rate) => (
-            <p>
+            <p key={rate}>
               <FaMoneyBill className="inline mr-2" /> {convertToTitleCase(rate)}
             </p>
           ))}
