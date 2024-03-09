@@ -31,15 +31,15 @@ const PropertySchema = new Schema(
       zipcode: {
         type: String,
       },
-      beds: {
-        type: Number,
-      },
-      baths: {
-        type: Number,
-      },
-      square_feet: {
-        type: Number,
-      },
+    },
+    beds: {
+      type: Number,
+    },
+    baths: {
+      type: Number,
+    },
+    square_feet: {
+      type: Number,
     },
     amenities: [{ type: String }],
     rates: {
