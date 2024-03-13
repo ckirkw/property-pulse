@@ -92,8 +92,6 @@ export const POST = async (request) => {
     const newProperty = new Property(propertyData);
     await newProperty.save();
 
-    console.log(propertyData);
-    // return new Response(JSON.stringify({ message: "ok" }, { status: 200 }));
     return Response.redirect(
       `${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`
     );
