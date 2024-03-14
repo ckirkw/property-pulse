@@ -2,6 +2,7 @@ import connectDB from "@/config/database";
 import Property from "@/models/Property";
 import { getSessionUser } from "@/utils/getSessionUser";
 import cloudinary from "@/config/cloudinary";
+import { Client } from "@googlemaps/google-maps-services-js";
 
 // GET /api/properties
 export const GET = async (request) => {
@@ -59,6 +60,32 @@ export const POST = async (request) => {
       },
       owner: userId,
     };
+
+    const client = new Client({});
+
+    try {
+      const {
+        data: { results },
+      } = await client.geocode({
+        params: {
+          key: process.env.NEXT_PUBLIC_GOOGLE_GEOCODING_API_KEY,
+          address: `${propertyData.location.street} ${propertyData.location.city}, ${propertyData.state} ${propertyData.zipcode}`,
+        },
+      });
+      if (results.length > 0) {
+        const {
+          geometry: {
+            location: { lat, lng },
+          },
+        } = results[0];
+        propertyData.location.lat = lat;
+        propertyData.location.long = lng;
+      } else {
+        console.warn("No geocoding results");
+      }
+    } catch (e) {
+      console.error("There was an error", e);
+    }
 
     // Upload images to cloudinary
 

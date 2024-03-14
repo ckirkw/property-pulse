@@ -13,6 +13,9 @@ module.exports = {
       gridTemplateColumns: {
         "70/30": "70% 28%",
       },
+      zIndex: {
+        500: "500",
+      },
     },
   },
   plugins: [],
